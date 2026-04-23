@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpi-model-app-frontend
+  namespace: cpi-model-app
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: cpi-model-app-frontend } }
+  template:
+    metadata: { labels: { app: cpi-model-app-frontend } }
+    spec:
+      containers:
+      - name: cpi-model-app-frontend
+        image: IMAGE_PLACEHOLDER
+        ports: [ { containerPort: 80 } ]
