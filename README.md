@@ -237,5 +237,3 @@ jobs:
   - Verify Flask base URL is reachable from browser/client network path and CORS is enabled.
 - Deployment not progressing:
   - Check `kubectl describe deployment cpi-model-app-frontend -n cpi-model-app` for image pull/env/config issues.
-
-Ship it.
