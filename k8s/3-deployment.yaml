@@ -13,3 +13,6 @@ spec:
       - name: cpi-model-app-frontend
         image: IMAGE_PLACEHOLDER
         ports: [ { containerPort: 80 } ]
+        envFrom:
+        - configMapRef:
+            name: cpi-model-app
