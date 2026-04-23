@@ -54,18 +54,3 @@ Redux store domains:
 - `models`: current model metadata, model history, evaluation job state
 - `history`: prediction history filters/table, eval history panel
 
-## Demo Flow
-
-1. Start on **Forecast**.
-2. Submit prediction (current model or explicit model version).
-3. Show queued -> running -> completed states in task card.
-4. Highlight prediction result card.
-5. Move to **Models** to launch **Train Model**, inspect current model by horizon, and view model history.
-6. Move to **History** for prediction logs and click model version eval history.
-
-## Notes
-
-- Frontend talks only to Flask backend over HTTP.
-- No direct assumptions about Celery/Redis/ClickHouse/S3 internals.
-- Paginated backend responses with `data.items` are normalized in the API client.
-- Designed for a clean 2-3 minute internal demo.
