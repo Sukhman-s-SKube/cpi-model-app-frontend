@@ -26,6 +26,7 @@ export function PredictionHistoryTable() {
           <tr>
             <th>Prediction ID</th>
             <th>Model Version</th>
+            <th>Selection</th>
             <th>Horizon</th>
             <th>Generated</th>
             <th>Predicted Value</th>
@@ -39,6 +40,7 @@ export function PredictionHistoryTable() {
             <tr key={row.prediction_id}>
               <td className="mono">{row.prediction_id}</td>
               <td className="mono">{row.model_version}</td>
+              <td>{row.selection_policy || '-'}</td>
               <td>{row.horizon_months}</td>
               <td>{formatDateTime(row.generated_at)}</td>
               <td>{formatNumber(row.predicted_value ?? row.predicted_cpi)}</td>

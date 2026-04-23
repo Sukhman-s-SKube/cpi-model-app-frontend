@@ -10,7 +10,7 @@ import { TaskState, TaskStatusResponse } from '../../types/task';
 interface ForecastState {
   form: {
     horizon_months: HorizonMonths;
-    modelMode: 'current' | 'explicit';
+    modelMode: 'current' | 'best' | 'explicit';
     model_version: string;
   };
   submission: {
@@ -76,9 +76,9 @@ const forecastSlice = createSlice({
     setForecastHorizon(state, action: PayloadAction<HorizonMonths>) {
       state.form.horizon_months = action.payload;
     },
-    setForecastModelMode(state, action: PayloadAction<'current' | 'explicit'>) {
+    setForecastModelMode(state, action: PayloadAction<'current' | 'best' | 'explicit'>) {
       state.form.modelMode = action.payload;
-      if (action.payload === 'current') {
+      if (action.payload !== 'explicit') {
         state.form.model_version = '';
       }
     },

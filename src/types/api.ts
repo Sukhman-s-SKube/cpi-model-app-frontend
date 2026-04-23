@@ -12,7 +12,7 @@ export interface ApiEnvelope<T> {
 
 export interface PredictRequest {
   horizon_months: HorizonMonths;
-  selection_policy?: 'current' | 'explicit';
+  selection_policy?: 'current' | 'best' | 'explicit';
   model_version?: string;
 }
 
@@ -40,7 +40,7 @@ export interface EvaluateRequestByPolicy {
   horizon_months: HorizonMonths;
   evaluation_start_date: string;
   evaluation_end_date: string;
-  selection_policy: 'current';
+  selection_policy: 'current' | 'best';
 }
 
 export interface EvaluateRequestByVersion {

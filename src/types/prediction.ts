@@ -19,6 +19,8 @@ export interface PredictionHistoryRow {
   model_version: string;
   horizon_months: HorizonMonths;
   generated_at: string;
+  selection_policy?: 'current' | 'best' | 'explicit' | string;
+  status?: string;
   predicted_value?: number;
   predicted_cpi?: number;
   lower_bound?: number;

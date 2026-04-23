@@ -42,6 +42,11 @@ export function PredictionForm({ onTaskCreated }: PredictionFormProps) {
             horizon_months: forecast.form.horizon_months,
             selection_policy: 'current' as const,
           }
+        : forecast.form.modelMode === 'best'
+          ? {
+              horizon_months: forecast.form.horizon_months,
+              selection_policy: 'best' as const,
+            }
         : {
             horizon_months: forecast.form.horizon_months,
             selection_policy: 'explicit' as const,
@@ -94,6 +99,14 @@ export function PredictionForm({ onTaskCreated }: PredictionFormProps) {
               onChange={() => dispatch(setForecastModelMode('explicit'))}
             />
             Explicit model version
+          </label>
+          <label>
+            <input
+              type="radio"
+              checked={forecast.form.modelMode === 'best'}
+              onChange={() => dispatch(setForecastModelMode('best'))}
+            />
+            Best model
           </label>
         </div>
       </div>

@@ -13,7 +13,7 @@ export function EvaluateForm() {
   const [horizon, setHorizon] = useState<HorizonMonths>(3);
   const [start, setStart] = useState('2024-01-01');
   const [end, setEnd] = useState('2024-12-31');
-  const [mode, setMode] = useState<'current' | 'version'>('current');
+  const [mode, setMode] = useState<'current' | 'best' | 'version'>('current');
   const [modelVersion, setModelVersion] = useState('');
   const historyRows = useAppSelector((state) => state.models.historyByHorizon[horizon].rows);
 
@@ -33,6 +33,13 @@ export function EvaluateForm() {
             evaluation_end_date: end,
             selection_policy: 'current' as const,
           }
+        : mode === 'best'
+          ? {
+              horizon_months: horizon,
+              evaluation_start_date: start,
+              evaluation_end_date: end,
+              selection_policy: 'best' as const,
+            }
         : {
             horizon_months: horizon,
             evaluation_start_date: start,
@@ -87,6 +94,10 @@ export function EvaluateForm() {
             <label>
               <input type="radio" checked={mode === 'version'} onChange={() => setMode('version')} />
               Explicit Version
+            </label>
+            <label>
+              <input type="radio" checked={mode === 'best'} onChange={() => setMode('best')} />
+              Best
             </label>
           </div>
         </div>
