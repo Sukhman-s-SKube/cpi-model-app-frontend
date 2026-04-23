@@ -10,7 +10,26 @@ import { HorizonMonths, ModelHistoryRow, ModelMetadata } from '../types/model';
 import { EvalHistoryRow, PredictionHistoryRow } from '../types/prediction';
 import { TaskStatusResponse } from '../types/task';
 
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000').replace(/\/$/, '');
+declare global {
+  interface Window {
+    __APP_CONFIG__?: {
+      API_BASE_URL?: string;
+      VITE_API_BASE_URL?: string;
+    };
+  }
+}
+
+function getApiBaseUrl(): string {
+  const runtimeConfigured =
+    typeof window !== 'undefined'
+      ? window.__APP_CONFIG__?.VITE_API_BASE_URL || window.__APP_CONFIG__?.API_BASE_URL
+      : undefined;
+
+  const buildConfigured = import.meta.env.VITE_API_BASE_URL as string | undefined;
+  return (runtimeConfigured || buildConfigured || 'http://localhost:5000').replace(/\/$/, '');
+}
+
+const API_BASE_URL = getApiBaseUrl();
 
 class ApiError extends Error {
   status?: number;

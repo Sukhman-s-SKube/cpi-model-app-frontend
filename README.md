@@ -26,6 +26,19 @@ npm run dev
 
 4. Open the app in your browser at the Vite URL shown in terminal (typically `http://localhost:5173`).
 
+## Runtime API Config For Containers/Kubernetes
+
+The Docker image supports runtime API configuration (no rebuild required):
+
+- Set `VITE_API_BASE_URL` in your container environment to your Flask backend URL.
+
+Resolution order in the app:
+
+1. `window.__APP_CONFIG__.VITE_API_BASE_URL` (generated at container startup)
+2. `window.__APP_CONFIG__.API_BASE_URL`
+3. build-time `VITE_API_BASE_URL`
+4. default `http://localhost:5000`
+
 ## Routes
 
 - `/forecast` (default)
@@ -53,4 +66,3 @@ Redux store domains:
 - `forecast`: prediction form, submission, task state, latest result
 - `models`: current model metadata, model history, evaluation job state
 - `history`: prediction history filters/table, eval history panel
-

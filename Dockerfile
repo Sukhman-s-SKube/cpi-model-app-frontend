@@ -17,4 +17,4 @@ RUN npm install -g serve@14
 COPY --from=build /app/dist ./dist
 
 EXPOSE 80
-CMD ["serve", "-s", "dist", "-l", "80"]
+CMD ["sh", "-c", "printf 'window.__APP_CONFIG__ = { VITE_API_BASE_URL: \"%s\" };\\n' \"${VITE_API_BASE_URL:-}\" > /app/dist/app-config.js && exec serve -s dist -l 80"]
